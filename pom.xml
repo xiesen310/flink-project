@@ -9,7 +9,8 @@
     <packaging>pom</packaging>
     <version>1.0.0</version>
     <modules>
-        <module>datare-port</module>
+        <module>data-report</module>
+        <module>flink-common</module>
     </modules>
 
     <name>flink-project</name>
@@ -45,17 +46,15 @@
                 <groupId>org.apache.flink</groupId>
                 <artifactId>flink-java</artifactId>
                 <version>${flink.version}</version>
-                <scope>provided</scope>
             </dependency>
             <dependency>
                 <groupId>org.apache.flink</groupId>
                 <artifactId>flink-streaming-java_${scala.binary.version}</artifactId>
                 <version>${flink.version}</version>
-                <scope>provided</scope>
             </dependency>
             <dependency>
                 <groupId>org.apache.flink</groupId>
-                <artifactId>flink-connector-kafka-0.10_${scala.binary.version}</artifactId>
+                <artifactId>flink-connector-kafka-0.11_${scala.binary.version}</artifactId>
                 <version>${flink.version}</version>
             </dependency>
             <dependency>
