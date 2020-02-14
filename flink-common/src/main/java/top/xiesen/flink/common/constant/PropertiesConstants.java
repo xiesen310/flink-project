@@ -25,6 +25,13 @@ public class PropertiesConstants {
     public static final String KAFKA_SINK_TOPIC = "kafka.sink.topic";
     public static final String DEFAULT_KAFKA_SINK_TOPIC = "kafka-default-sink";
 
+    /**
+     * redis
+     */
+
+    public static final String REDIS_HOST = "redis.host";
+    public static final String REDIS_PORT = "redis.port";
+
 
     public static final String METRICS_TOPIC = "metrics.topic";
     public static final String CONSUMER_FROM_TIME = "consumer.from.time";

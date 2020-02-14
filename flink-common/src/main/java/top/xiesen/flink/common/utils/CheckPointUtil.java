@@ -60,7 +60,7 @@ public class CheckPointUtil {
          * checkpoint rocksdb
          */
         if (parameterTool.getBoolean(STREAM_CHECKPOINT_ENABLE, false) && CHECKPOINT_ROCKETSDB.equals(parameterTool.get(STREAM_CHECKPOINT_TYPE).toLowerCase())) {
-            RocksDBStateBackend rocksDBStateBackend = new RocksDBStateBackend(parameterTool.get(STREAM_CHECKPOINT_DIR));
+            RocksDBStateBackend rocksDBStateBackend = new RocksDBStateBackend(parameterTool.get(STREAM_CHECKPOINT_DIR), true);
             env.setStateBackend(rocksDBStateBackend);
         }
 
