@@ -17,6 +17,15 @@ public class PropertiesConstants {
     public static final String LOGS_TOPIC = "logs.topic";
     public static final String LATE_LOG_TOPIC = "late.log.topic";
     public static final String DEFAULT_LATE_LOG_TOPIC = "lateLog";
+
+    /**
+     * kafka sink
+     */
+    public static final String KAFKA_SINK_BROKERS = "kafka.sink.brokers";
+    public static final String KAFKA_SINK_TOPIC = "kafka.sink.topic";
+    public static final String DEFAULT_KAFKA_SINK_TOPIC = "kafka-default-sink";
+
+
     public static final String METRICS_TOPIC = "metrics.topic";
     public static final String CONSUMER_FROM_TIME = "consumer.from.time";
     public static final String STREAM_PARALLELISM = "stream.parallelism";

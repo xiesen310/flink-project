@@ -11,6 +11,7 @@
     <modules>
         <module>data-report</module>
         <module>flink-common</module>
+        <module>data-warehouse</module>
     </modules>
 
     <name>flink-project</name>
