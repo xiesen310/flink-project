@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>ods-data-clean</module>
+        <module>dwd-data-clean</module>
     </modules>
 
 
