@@ -23,6 +23,19 @@ public class DateUtil {
             return new SimpleDateFormat("yyyy.MM.dd");
         }
     };
+    private static ThreadLocal<SimpleDateFormat> utcSdf = new ThreadLocal<SimpleDateFormat>() {
+        @Override
+        protected SimpleDateFormat initialValue() {
+            return new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS+08:00");
+        }
+    };
+
+    private static ThreadLocal<SimpleDateFormat> sdf1 = new ThreadLocal<SimpleDateFormat>() {
+        @Override
+        protected SimpleDateFormat initialValue() {
+            return new SimpleDateFormat("yyyyMMdd");
+        }
+    };
 
     public static Long timestamp(String timestamp) {
         return new DateTime(timestamp).toDate().getTime();
@@ -39,5 +52,15 @@ public class DateUtil {
     public static String getUTCTimeStr(long interval) {
         long currentTimeMillis = System.currentTimeMillis();
         return format.format(new Date(currentTimeMillis + interval)).toString();
+    }
+
+    public static String yyyyMMddSpt(String utcDateStr) {
+        Date date = null;
+        try {
+            date = utcSdf.get().parse(utcDateStr);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return sdf1.get().format(date);
     }
 }
