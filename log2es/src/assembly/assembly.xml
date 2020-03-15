@@ -1,0 +1,33 @@
+<assembly>
+    <id>1.0.0.1</id>
+    <formats>
+        <!-- zip,tar,tar.gz,tar.bz2,jar,dir,war -->
+        <format>tar.gz</format>
+    </formats>
+    <!--<dependencySets>
+        <dependencySet>
+            <outputDirectory>/lib</outputDirectory>
+        </dependencySet>
+    </dependencySets>-->
+    <!-- 需要打包的文件集 -->
+    <fileSets>
+        <fileSet>
+            <directory>src/main/resources</directory>
+            <outputDirectory>../</outputDirectory>
+            <fileMode>0644</fileMode>
+        </fileSet>
+        <fileSet>
+            <directory>src/main/bin</directory>
+            <outputDirectory>../</outputDirectory>
+            <fileMode>0755</fileMode>
+        </fileSet>
+        <fileSet>
+            <directory>${project.build.directory}</directory>
+            <outputDirectory>../</outputDirectory>
+            <fileMode>0644</fileMode>
+            <includes>
+                <include>${project.artifactId}-${project.version}.jar</include>
+            </includes>
+        </fileSet>
+    </fileSets>
+</assembly>
