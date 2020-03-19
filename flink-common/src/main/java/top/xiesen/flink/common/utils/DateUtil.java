@@ -45,16 +45,16 @@ public class DateUtil {
         return sdf.get().format(new DateTime(timestamp).toDate());
     }
 
-    public static String getUTCTimeStr() {
+    public static String getUtcTimeStr() {
         return format.format(new Date()).toString();
     }
 
-    public static String getUTCTimeStr(long interval) {
+    public static String getUtcTimeStr(long interval) {
         long currentTimeMillis = System.currentTimeMillis();
         return format.format(new Date(currentTimeMillis + interval)).toString();
     }
 
-    public static String yyyyMMddSpt(String utcDateStr) {
+    public static String formatTime(String utcDateStr) {
         Date date = null;
         try {
             date = utcSdf.get().parse(utcDateStr);

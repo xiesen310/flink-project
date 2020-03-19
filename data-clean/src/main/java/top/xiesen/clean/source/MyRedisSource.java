@@ -47,7 +47,7 @@ public class MyRedisSource extends RichSourceFunction<HashMap<String, String>> {
     @Override
     public void run(SourceContext<HashMap<String, String>> ctx) throws Exception {
         // 存储所有国家和大区的关系
-        HashMap<String, String> keyValueMap = new HashMap<>();
+        HashMap<String, String> keyValueMap = new HashMap<>(10);
         while (isRunning) {
             try {
                 keyValueMap.clear();

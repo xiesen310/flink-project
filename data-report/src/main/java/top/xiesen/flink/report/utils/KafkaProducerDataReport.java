@@ -1,4 +1,4 @@
-package top.xiesen.clean.util;
+package top.xiesen.flink.report.utils;
 
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
@@ -10,28 +10,13 @@ import java.util.Properties;
 import java.util.Random;
 
 /**
- * 模拟数据格式:
- * {
- * "dt": "2020-02-14 13:24:41",
- * "countryCode": "IN",
- * "data": [{
- * "type": "s1",
- * "score": 0.5,
- * "level": "A+"
- * }, {
- * "type": "s3",
- * "score": 0.2,
- * "level": "D"
- * }]
- * }
- *
- * @Description 模拟数据
- * @className top.xiesen.clean.source.MyRedisSource
+ * @Description 数据报表模拟数据
+ * @className top.xiesen.flink.report.utils.kafkaProducerDataReport
  * @Author 谢森
  * @Email xiesen310@163.com
- * @Date 2020/2/14 13:18
+ * @Date 2020/2/12 13:50
  */
-public class kafkaProducer {
+public class KafkaProducerDataReport {
 
     public static void main(String[] args) throws Exception {
         Properties prop = new Properties();
@@ -41,19 +26,19 @@ public class kafkaProducer {
         prop.put("key.serializer", StringSerializer.class.getName());
         prop.put("value.serializer", StringSerializer.class.getName());
         //指定topic名称
-        String topic = "allData";
+        String topic = "auditLog";
 
         //创建producer链接
         KafkaProducer<String, String> producer = new KafkaProducer<String, String>(prop);
 
-        //{"dt":"2018-01-01 10:11:11","countryCode":"US","data":[{"type":"s1","score":0.3,"level":"A"},{"type":"s2","score":0.2,"level":"B"}]}
+        //{"dt":"2018-01-01 10:11:11","type":"shelf","username":"jack","area":"AREA_US",}
 
         //生产消息
         while (true) {
-            String message = "{\"dt\":\"" + getCurrentTime() + "\",\"countryCode\":\"" + getCountryCode() + "\",\"data\":[{\"type\":\"" + getRandomType() + "\",\"score\":" + getRandomScore() + ",\"level\":\"" + getRandomLevel() + "\"},{\"type\":\"" + getRandomType() + "\",\"score\":" + getRandomScore() + ",\"level\":\"" + getRandomLevel() + "\"}]}";
+            String message = "{\"dt\":\"" + getCurrentTime() + "\",\"type\":\"" + getRandomType() + "\",\"area\":\"" + getRandomArea() + "\"}";
             System.out.println(message);
             producer.send(new ProducerRecord<String, String>(topic, message));
-            Thread.sleep(2000);
+            Thread.sleep(1000);
         }
         //关闭链接
         //producer.close();
@@ -64,8 +49,8 @@ public class kafkaProducer {
         return sdf.format(new Date());
     }
 
-    public static String getCountryCode() {
-        String[] types = {"US", "TW", "HK", "PK", "KW", "SA", "IN"};
+    public static String getRandomArea() {
+        String[] types = {"AREA_US", "AREA_TW", "AREA_HK", "AREA_PK", "AREA_KW", "AREA_SA", "AREA_IN"};
         Random random = new Random();
         int i = random.nextInt(types.length);
         return types[i];
@@ -73,21 +58,15 @@ public class kafkaProducer {
 
 
     public static String getRandomType() {
-        String[] types = {"s1", "s2", "s3", "s4", "s5"};
+        String[] types = {"shelf", "unshelf", "black", "child_shelf", "child_unshelf"};
         Random random = new Random();
         int i = random.nextInt(types.length);
         return types[i];
     }
 
-    public static double getRandomScore() {
-        double[] types = {0.3, 0.2, 0.1, 0.5, 0.8};
-        Random random = new Random();
-        int i = random.nextInt(types.length);
-        return types[i];
-    }
 
-    public static String getRandomLevel() {
-        String[] types = {"A", "A+", "B", "C", "D"};
+    public static String getRandomUserName() {
+        String[] types = {"tom", "toms", "lucy", "allen", "jack"};
         Random random = new Random();
         int i = random.nextInt(types.length);
         return types[i];

@@ -24,8 +24,10 @@ public class HadoopSink {
         BucketingSink<LogType> sink = new BucketingSink<LogType>(parameterTool.get(HDFS_URL));
         sink.setBucketer(new CustomBucketer(parameterTool.get(PARTITION_FIELD_NAME, DEFAULT_PARTITION_FIELD_NAME)));
         sink.setWriter(new CustomWriter());
-        sink.setBatchSize(parameterTool.getLong(HDFS_BATCH_SIZE, DEFAULT_HDFS_BATCH_SIZE)); // 默认是 128M
-        sink.setBatchRolloverInterval(parameterTool.getLong(HDFS_BATCH_ROLLOVER_INTERVAL, DEFAULT_HDFS_BATCH_ROLLOVER_INTERVAL)); // 默认是10分钟
+        // 默认是 128M
+        sink.setBatchSize(parameterTool.getLong(HDFS_BATCH_SIZE, DEFAULT_HDFS_BATCH_SIZE));
+        // 默认是10分钟
+        sink.setBatchRolloverInterval(parameterTool.getLong(HDFS_BATCH_ROLLOVER_INTERVAL, DEFAULT_HDFS_BATCH_ROLLOVER_INTERVAL));
         sink.setPendingPrefix("");
         sink.setPendingSuffix("");
         sink.setInProgressPrefix(".");

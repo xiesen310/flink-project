@@ -21,8 +21,8 @@ import top.xiesen.warehouse.ods.source.KafkaSourceUtil;
  * @Email xiesen310@163.com
  * @Date 2020/2/14 10:18
  */
-public class ODSDataClean {
-    private static final Logger logger = LoggerFactory.getLogger(ODSDataClean.class);
+public class OdsDataClean {
+    private static final Logger logger = LoggerFactory.getLogger(OdsDataClean.class);
 
     public static void main(String[] args) throws Exception {
         ParameterTool parameterTool = ExecutionEnvUtil.createParameterTool(args);
@@ -57,6 +57,6 @@ public class ODSDataClean {
          */
         mapData.addSink(KafkaSinkUtil.kafkaProducer(parameterTool));
 
-        env.execute(ODSDataClean.class.getSimpleName());
+        env.execute(OdsDataClean.class.getSimpleName());
     }
 }

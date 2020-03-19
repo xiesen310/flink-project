@@ -21,6 +21,9 @@ import java.util.List;
  */
 public class Es6Sink {
     private static final Logger LOG = LoggerFactory.getLogger(Es6Sink.class);
+    private final String commaSeparator = ",";
+    private final String colonSeparator = ":";
+    private final String httpProtocol = "http";
     private ParameterTool parameterTool;
 
     public Es6Sink(ParameterTool parameterTool) {
@@ -31,9 +34,9 @@ public class Es6Sink {
     public ElasticsearchSink<LogType> getElasticsearchSink() {
         List<HttpHost> httpHosts = new ArrayList<>();
 
-        for (String s : parameterTool.get(EsConstants.ELASTICSEARCH_URL).split(",")) {
-            String[] httpHost = s.split(":");
-            httpHosts.add(new HttpHost(httpHost[0], Integer.parseInt(httpHost[1]), "http"));
+        for (String s : parameterTool.get(EsConstants.ELASTICSEARCH_URL).split(commaSeparator)) {
+            String[] httpHost = s.split(colonSeparator);
+            httpHosts.add(new HttpHost(httpHost[0], Integer.parseInt(httpHost[1]), httpProtocol));
         }
 
         /**

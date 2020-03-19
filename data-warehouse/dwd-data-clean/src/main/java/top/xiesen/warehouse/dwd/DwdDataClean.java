@@ -24,7 +24,7 @@ import static top.xiesen.flink.common.constant.PropertiesConstants.*;
  * @Email xiesen310@163.com
  * @Date 2020/2/14 12:55
  */
-public class DWDDataClean {
+public class DwdDataClean {
     public static void main(String[] args) throws Exception {
         ParameterTool parameterTool = ExecutionEnvUtil.createParameterTool(args);
         StreamExecutionEnvironment env = ExecutionEnvUtil.prepare(parameterTool);

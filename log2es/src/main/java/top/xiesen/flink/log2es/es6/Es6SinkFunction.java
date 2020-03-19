@@ -30,7 +30,8 @@ public class Es6SinkFunction implements ElasticsearchSinkFunction<LogType> {
     private static final Logger LOG = LoggerFactory.getLogger(Es6SinkFunction.class);
     private static String indexSuffix = "_flink";
     private ParameterTool parameterTool;
-    private Map<String, String> indexTopology = new HashMap<>();
+    private int initialCapacity = 20;
+    private Map<String, String> indexTopology = new HashMap<>(initialCapacity);
 
     public Es6SinkFunction(ParameterTool parameterTool) {
         this.parameterTool = parameterTool;
@@ -86,7 +87,7 @@ public class Es6SinkFunction implements ElasticsearchSinkFunction<LogType> {
                 LOG.error("获取offset失败,LogType数据: {}", JSON.toJSON(logType), e.getCause());
             }
 
-            Map<String, String> dimensions = new HashMap();
+            Map<String, String> dimensions = new HashMap(initialCapacity);
             Map<String, String> tmp = logType.getDimensions();
 
             try {
@@ -121,10 +122,10 @@ public class Es6SinkFunction implements ElasticsearchSinkFunction<LogType> {
             }
 
             String indexStr = sb.toString().toLowerCase();
-            Map<String, Double> measures = new HashMap<>();
+            Map<String, Double> measures = new HashMap<>(initialCapacity);
             Map<String, Double> tmp1 = logType.getMeasures();
 
-            Map<String, String> normalFields = new HashMap<>();
+            Map<String, String> normalFields = new HashMap<>(initialCapacity);
             Map<String, String> tmp2 = logType.getNormalFields();
 
             try {
@@ -138,7 +139,7 @@ public class Es6SinkFunction implements ElasticsearchSinkFunction<LogType> {
                 LOG.error("解析 Measures 和 NormalFields  出错,LogType数据: {}", JSON.toJSON(logType), e.getCause());
             }
 
-            Map<String, Object> bigMap = new HashMap<>();
+            Map<String, Object> bigMap = new HashMap<>(initialCapacity);
             bigMap.put(LogConstants.LOG_TYPE_NAME, logTypeName);
             bigMap.put(LogConstants.TIMESTAMP, timestamp);
             bigMap.put(LogConstants.SOURCE, source);
@@ -153,7 +154,7 @@ public class Es6SinkFunction implements ElasticsearchSinkFunction<LogType> {
             return Requests.indexRequest().index(indexStr).type(logTypeName).source(bigMap, XContentType.JSON);
         } else {
             LOG.error("写入数据失败,错误数据写入到 other index");
-            Map<String, Object> bigMap = new HashMap<>();
+            Map<String, Object> bigMap = new HashMap<>(initialCapacity);
             return Requests.indexRequest().index(LogConstants.OTHER).type(logTypeName).source(bigMap, XContentType.JSON);
         }
     }

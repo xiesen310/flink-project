@@ -60,8 +60,8 @@ public class CheckPointUtil {
          * checkpoint rocksdb
          */
         if (parameterTool.getBoolean(STREAM_CHECKPOINT_ENABLE, false) && CHECKPOINT_ROCKETSDB.equals(parameterTool.get(STREAM_CHECKPOINT_TYPE).toLowerCase())) {
-            RocksDBStateBackend rocksDBStateBackend = new RocksDBStateBackend(parameterTool.get(STREAM_CHECKPOINT_DIR), true);
-            env.setStateBackend(rocksDBStateBackend);
+            RocksDBStateBackend rocksdbStateBackend = new RocksDBStateBackend(parameterTool.get(STREAM_CHECKPOINT_DIR), true);
+            env.setStateBackend(rocksdbStateBackend);
         }
 
         //设置 checkpoint 周期时间

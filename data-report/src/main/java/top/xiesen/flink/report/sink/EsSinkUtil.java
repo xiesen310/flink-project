@@ -56,7 +56,7 @@ public class EsSinkUtil {
                         httpHosts,
                         new ElasticsearchSinkFunction<Tuple4<String, String, String, Long>>() {
                             public IndexRequest createIndexRequest(Tuple4<String, String, String, Long> element) {
-                                Map<String, Object> json = new HashMap<>();
+                                Map<String, Object> json = new HashMap<>(10);
                                 json.put("time", element.f0);
                                 json.put("type", element.f1);
                                 json.put("area", element.f2);

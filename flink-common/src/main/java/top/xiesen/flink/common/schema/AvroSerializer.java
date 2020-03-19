@@ -125,7 +125,7 @@ public class AvroSerializer {
      */
     public synchronized byte[] serializing(String json) {
         byte[] returnstr = null;
-        JSONObject jsonObject = (JSONObject) JSONObject.parse(json);// new TypeReference<Object>() {}
+        JSONObject jsonObject = (JSONObject) JSONObject.parse(json);
         GenericRecord datum = new GenericData.Record(this.schema);
         // 将数据加到datum中
         for (int i = 0; i < filedsArrayList.size(); i++) {

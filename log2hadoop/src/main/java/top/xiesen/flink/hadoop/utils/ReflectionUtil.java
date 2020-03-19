@@ -117,8 +117,8 @@ public class ReflectionUtil {
                 String value = list.get(i);
                 if ("timestamp".equals(value)) {
                     String timestamp = (String) getFieldValueByName("timestamp", zorkData);
-                    String yyyyMMddSpt = DateUtil.yyyyMMddSpt(timestamp);
-                    builder.append("/" + yyyyMMddSpt);
+                    String timeFormat = DateUtil.formatTime(timestamp);
+                    builder.append("/" + timeFormat);
                 } else {
                     if (value.contains("[")) {
                         String mapKey = getMapKey(value);
@@ -140,7 +140,7 @@ public class ReflectionUtil {
         LogType logType = new LogType();
         logType.setLogTypeName("test");
         logType.setTimestamp("2020-03-11T18:30:21.847+08:00");
-        Map<String, String> dimensions = new HashMap<>();
+        Map<String, String> dimensions = new HashMap<>(20);
         dimensions.put("appsystem", "tdx");
         logType.setDimensions(dimensions);
 

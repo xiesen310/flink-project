@@ -35,7 +35,9 @@ import static top.xiesen.flink.common.constant.PropertiesConstants.*;
  */
 public class DataReport {
     private static final Logger logger = LoggerFactory.getLogger(DataReport.class);
-    // 保存迟到的数据
+    /**
+     * 保存迟到的数据
+     */
     private static OutputTag<Tuple3<Long, String, String>> outputTag = new OutputTag<Tuple3<Long, String, String>>("late-data") {
     };
 
@@ -74,8 +76,10 @@ public class DataReport {
                 .assignTimestampsAndWatermarks(new MyWatermark())
                 .keyBy(1, 2)
                 .window(TumblingEventTimeWindows.of(Time.seconds(30)))
-                .allowedLateness(Time.seconds(15))// 允许迟到 30s
-                .sideOutputLateData(outputTag) // 记录迟到太久的数据
+                // 允许迟到 30s
+                .allowedLateness(Time.seconds(15))
+                // 记录迟到太久的数据
+                .sideOutputLateData(outputTag)
                 .apply(new MyAggFunction())
                 .uid("window-operator");
 

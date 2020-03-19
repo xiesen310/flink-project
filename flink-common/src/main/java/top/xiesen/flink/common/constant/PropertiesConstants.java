@@ -47,11 +47,15 @@ public class PropertiesConstants {
     public static final String CHECKPOINT_FS = "fs";
     public static final String CHECKPOINT_ROCKETSDB = "rocksdb";
 
-    //es config
+    /**
+     * elasticsearch 相关
+     */
     public static final String ELASTICSEARCH_BULK_FLUSH_MAX_ACTIONS = "elasticsearch.bulk.flush.max.actions";
     public static final String ELASTICSEARCH_URLS = "elasticsearch.urls";
 
-    //mysql
+    /**
+     * mysql 相关
+     */
     public static final String MYSQL_DATABASE = "mysql.database";
     public static final String MYSQL_HOST = "mysql.host";
     public static final String MYSQL_PASSWORD = "mysql.password";

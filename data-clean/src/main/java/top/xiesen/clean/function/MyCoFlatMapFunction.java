@@ -16,10 +16,18 @@ import java.util.HashMap;
  */
 public class MyCoFlatMapFunction implements CoFlatMapFunction<String, HashMap<String, String>, String> {
 
-    // 存储国家和大区的映射关系
+    /**
+     * 存储国家和大区的映射关系
+     */
     HashMap<String, String> allMap = new HashMap<>();
 
-    // flatMap1 处理的是 kafka 中的数据
+    /**
+     * flatMap1 处理的是 kafka 中的数据
+     *
+     * @param value String
+     * @param out   Collector<String>
+     * @throws Exception
+     */
     @Override
     public void flatMap1(String value, Collector<String> out) throws Exception {
         JSONObject jsonObject = JSONObject.parseObject(value);
@@ -38,7 +46,13 @@ public class MyCoFlatMapFunction implements CoFlatMapFunction<String, HashMap<St
         }
     }
 
-    // flatMap2 处理的是 redis 中的数据
+    /**
+     * flatMap2 处理的是 redis 中的数据
+     *
+     * @param value HashMap<String, String>
+     * @param out   Collector<String>
+     * @throws Exception
+     */
     @Override
     public void flatMap2(HashMap<String, String> value, Collector<String> out) throws Exception {
         this.allMap = value;

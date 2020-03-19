@@ -15,7 +15,10 @@ import javax.annotation.Nullable;
  */
 public class MyWatermark implements AssignerWithPeriodicWatermarks<Tuple3<Long, String, String>> {
     long currentMaxTimeStamp = 0L;
-    final Long maxOutOfOrderness = 10000L; // 最大允许乱序时间 10s
+    /**
+     * 最大允许乱序时间 10s
+     */
+    final Long maxOutOfOrderness = 10000L;
 
     @Nullable
     @Override
@@ -25,7 +28,7 @@ public class MyWatermark implements AssignerWithPeriodicWatermarks<Tuple3<Long, 
 
     @Override
     public long extractTimestamp(Tuple3<Long, String, String> element, long previousElementTimestamp) {
-        Long timestamp = element.f0;
+        long timestamp = element.f0;
         currentMaxTimeStamp = Math.max(timestamp, currentMaxTimeStamp);
         return timestamp;
     }

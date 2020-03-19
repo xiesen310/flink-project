@@ -20,6 +20,10 @@ import static top.xiesen.flink.common.constant.KafkaConstants.*;
  * @Date 2020/3/15 12:45
  */
 public class KafkaUtil {
+    private static final String NONE = "none";
+    private static final String EARLIEST = "earliest";
+    private static final String LATEST = "latest";
+
     /**
      * 设置 kafka 消费数据的模式
      *
@@ -27,13 +31,13 @@ public class KafkaUtil {
      * @param kafkaConsumerModel 消费模式
      */
     public static void setKafkaConsumerModel(FlinkKafkaConsumer011 kafkaConsumer011, String kafkaConsumerModel) {
-        if ("none".equals(kafkaConsumerModel.toLowerCase())) {
+        if (NONE.equals(kafkaConsumerModel.toLowerCase())) {
             //  Flink从topic中指定的group上次消费的位置开始消费，所以必须配置group.id参数
             kafkaConsumer011.setStartFromGroupOffsets();
-        } else if ("earliest".equals(kafkaConsumerModel.toLowerCase())) {
+        } else if (EARLIEST.equals(kafkaConsumerModel.toLowerCase())) {
             // Flink从topic中最初的数据开始消费
             kafkaConsumer011.setStartFromEarliest();
-        } else if ("latest".equals(kafkaConsumerModel.toLowerCase())) {
+        } else if (LATEST.equals(kafkaConsumerModel.toLowerCase())) {
             // Flink从topic中最新的数据开始消费
             kafkaConsumer011.setStartFromLatest();
         }
